@@ -2,7 +2,7 @@
 Design and code by Loggit
 
 Ngôn ngữ lập trình sử dụng: 
-  + Front End: HTML, CSS, JS
+  + Front End: HTML, CSS, JavaScript
   + Back End: Java
   + Database: MySQL
 Công nghệ sử dụng:
