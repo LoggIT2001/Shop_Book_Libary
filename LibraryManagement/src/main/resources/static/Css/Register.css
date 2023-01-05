@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.req label::after{
+    content: "*";
+    color: red;
+}
+.error{
+	color: red;
+}
+.er{
+	color: red;
+}
+#username_validation, #email_validation, #phone_validation, #pass_validation, #confimrpass_validation{
+	display: none;
+}

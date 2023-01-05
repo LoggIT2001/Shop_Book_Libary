@@ -1,0 +1,11 @@
+@charset "UTF-8";
+.req label::after{
+    content: "*";
+    color: red;
+}
+.error{
+	color: red;
+}
+.er{
+	color: red;
+}

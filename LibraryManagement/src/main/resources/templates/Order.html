@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/Css/style.css}" type="text/css" />
+<link rel="stylesheet" th:href="@{/Css/ShopBookDetail.css}"
+	type="text/css" />
+<link rel="stylesheet" th:href="@{/Css/Order.css}" type="text/css"/>
+<title>Order</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-light "
+		style="background-color: paleturquoise;">
+		<div class="container">
+			<a class="navbar-brand" th:href="@{/loggit/HomeBook}">Book
+				Library</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarsExampleDefault"
+				aria-controls="navbarsExampleDefault" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse justify-content-end"
+				id="navbarsExampleDefault">
+				<ul class="navbar-nav m-auto">
+					<li class="nav-item"><a class="nav-link"
+						th:text="'Hello, ' + ${name}"></a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/loggit/HomeBook}">Shop</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/loggit/shop_book/{id}(id=1)}">Shop Detail</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/loggit/listorder}">Check Order</a></li>
+				</ul>
+				<a class="btn btn-success btn-sm ml-3" th:href="@{/loggit/cart}">
+					<i class="fa fa-shopping-cart"></i> Cart 
+				</a>
+				<div class="form-inline my-2 my-lg-0">
+                	<a th:href="@{/loggit/login}" class="btn btn-success btn-sm ml-5">Logout &nbsp;<i class="fa fa-sign-out-alt" aria-hidden="true"></i></a>
+                </div> 
+			</div>
+		</div>
+	</nav>
+	<hr>
+	<section>
+		<div class="breadcrumb-section set-bg"
+			data-setbg="/img/Book-Banner-deatil.jpg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="breadcrumb__text">
+							<h1 class="head">Check Order</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 p-5 bg-while rounded shadow-sm mb-5">
+				<div class="table-respansive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col" class="border-0 bg-light">
+									<div class="p-2 text-uppercase">Date</div>
+								</th>
+								<th scope="col" class="border-0 bg-light">
+									<div class="p-2 text-uppercase">Address</div>
+								</th>
+								<th scope="col" class="border-0 bg-light">
+									<div class="py-2 text-uppercase">Quantity</div>
+								</th>
+								<th scope="col" class="border-0 bg-light">
+									<div class="py-2 text-uppercase">Total Price</div>
+								</th>
+								<th scope="col" class="border-0 bg-light">
+									<div class="py-2 text-uppercase">Status</div>
+								</th>
+								<th scope="col" class="border-0 bg-light">
+									<div class="py-2 text-uppercase">Action</div>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="o: ${liorder}">
+								<td class="align-middle"
+									th:text="${#dates.format(o.date, 'yyyy-MM-dd')}"></td>
+								<td class="align-middle" th:text="${o.address}"></td>
+								<td class="align-middle" th:text="${o.quantity}"></td>
+								<td class="align-middle" th:text="${o.totalprice} + ' $'"></td>
+								<td class="align-middle" th:text="${o.status}"></td>
+								<td class="container_swap">
+									<div class="div_left">
+										<a th:href="@{/loggit/order/{id}(id=${o.id})}" class="btn btn-info">Check</a>
+									</div>
+								<!--  	<div class="div_right">
+										<a th:href="@{/loggit/deleteorder/{id}(id=${o.id})}"
+											class="btn btn-danger" id="deleteButton">Cancel</a>
+									</div>-->
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<br />
+	</div>
+	<footer class="page-footer text-center font-small mt-4 wow fadeIn"
+		style="background-color: lightslategrey;">
+		<hr class="my-4">
+		<div class="">
+			<a target="_blank"><i class="fab fa-facebook-f mr-3"></i></a> <a
+				target="_blank"><i class="fab fa-google-plus-g mr-3"></i></a> <a
+				target="_blank"><i class="fab fa-github mr-3"></i></a> <a
+				target="_blank"><i class="fab fa-dribbble mr-3"></i></a> <a
+				target="_blank"><i class="fab fa-pinterest mr-3"></i></a> <a
+				target="_blank"><i class="fab fa-codepen mr-3"></i></a>
+		</div>
+		<div class="footer-copyright py-3">
+			© 2022 Design By: <a target="_blank"> Loggit </a>
+		</div>
+	</footer>
+	<script th:src="@{/JS/Bookdetailshop.js}" type="text/javascript"></script>
+	<script th:src="@{/JS/jquery-3.3.1.min.js}" type="text/javascript"></script>
+	<script th:src="@{/JS/bootstrap.min.js}" type="text/javascript"></script>
+	<script th:src="@{/JS/owl.carousel.min.js}" type="text/javascript"></script>
+	<script th:src="@{/JS/main.js}" type="text/javascript"></script>
+</body>
+</html>

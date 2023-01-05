@@ -1,0 +1,39 @@
+@charset "UTF-8";
+.req label::after{
+    content: "*";
+    color: red;
+}
+.container_hh1{
+    width: 100%;
+}
+.div_left{
+    width: 50%;
+    float: left;
+}
+.div_right{
+    width: 50%;
+    float: right;
+}
+.input_sty{
+    width: 150px;
+}
+.input_des{
+    width : 520px;
+    height: 200px;
+}
+.input_cat{
+    width: 200px;
+}
+.hhh{
+    text-align: center;
+}
+.input_img{
+    width : 450px;
+    height: 250px;
+}
+.er{
+	color: red;
+}
+.error{
+	color: red;
+}

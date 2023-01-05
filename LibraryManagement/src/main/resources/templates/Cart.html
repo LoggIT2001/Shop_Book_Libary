@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Cart Page</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/Css/style.css}" type="text/css" />
+<link rel="stylesheet" th:href="@{/Css/ShopBookDetail.css}"
+	type="text/css" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-light "
+		style="background-color: paleturquoise;">
+		<div class="container">
+			<a class="navbar-brand" th:href="@{/loggit/HomeBook}">Book
+				Library</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarsExampleDefault"
+				aria-controls="navbarsExampleDefault" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse justify-content-end"
+				id="navbarsExampleDefault">
+				<ul class="navbar-nav m-auto">
+					<li class="nav-item"><a class="nav-link"
+						th:text="'Hello, ' + ${name}"></a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/loggit/HomeBook}">Shop</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/loggit/shop_book/{id}(id=1)}">Shop Detail</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/loggit/listorder}">Check Order</a></li>
+				</ul>
+				<a class="btn btn-success btn-sm ml-3" th:href="@{/loggit/cart}">
+					<i class="fa fa-shopping-cart"></i> Cart
+				</a>
+				<div class="form-inline my-2 my-lg-0">
+                	<a th:href="@{/loggit/login}" class="btn btn-success btn-sm ml-5">Logout &nbsp;<i class="fa fa-sign-out-alt" aria-hidden="true"></i></a>
+                </div> 
+			</div>
+		</div>
+	</nav>
+	<hr>
+	<section>
+		<div class="breadcrumb-section set-bg"
+			data-setbg="/img/Book-Banner-deatil.jpg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="breadcrumb__text">
+							<h1 class="head">Shop Cart</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="">
+		<div class="px-4 px-lg-0">
+			<div class="pb-5">
+				<form th:action="@{/loggit/order}" th:method="post">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12 p-5 bg-while rounded shadow-sm mb-5">
+								<div class="table-respansive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col" class="border-0 bg-light">
+													<div class="p-2 px-3 text-uppercase">Book</div>
+												</th>
+												<th scope="col" class="border-0 bg-light">
+													<div class="py-2 text-uppercase">Price</div>
+												</th>
+												<th scope="col" class="border-0 bg-light">
+													<div class="py-2 text-uppercase">Quantity</div>
+												</th>
+												<th scope="col" class="border-0 bg-light">
+													<div class="py-2 text-uppercase">Delete</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="b: ${book_cart}">
+												<th scope="row">
+													<div class="p-2">
+														<img th:src="*{'data:image/jpeg;base64,'+{b.book.img}}" alt=""
+															width="70"
+															class="img-fluid rounded
+															shadow-sm">
+														<div class="ml-3 d-inline-block align-middle">
+															<h5 class="mb-0">
+																<a th:href="@{/loggit/shop_book/{id}(id=${b.book.id})}"
+																	class="text-dark d-inline-block" th:text="${b.book.title}"></a>
+															</h5>
+															<span class="text-muted font-weight-normal font-italic"></span>
+														</div>
+													</div>
+												</th>
+												<td class="align-middle" th:text="${b.book.price} + ' $'"></td>
+												<td class="align-middle" th:text="${b.quantity}"></td>
+												<td class="align-middle"><a
+													th:href="@{/loggit/cart/delete/{id}(id=${b.book.id})}"
+													class="text-dark">
+														<button type="button" class="btn btn-danger">Delete</button>
+												</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row py-5 p-4 bg-white rounded shadow-sm">
+							<div class="col-lg-6">
+								<div
+									class="bg-light rounded-pill px-4 py-3 text-uppercase
+									font-weight-bold">Address</div>
+								<div class="p-4">
+									<div class="input-group mb-4 border rounded-pill p-2">
+										<input type="text" name="address" placeholder="Add Address"
+											aria-describedby="button-addon3"
+											class="form-control border-0">
+										<div class="input-group-append border-0">
+											<button id="button-addon3" type="button"
+												class="btn btn-primary px-4
+												rounded-pill">
+												<i class=" mr-2"></i>Use
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div
+									class="bg-light rounded-pill px-4 py-3 text-uppercase
+									font-weight-bold">Total
+									Price</div>
+								<div class="p-4">
+									<ul class="list-unstyled mb-4">
+										<li class="d-flex justify-content-between py-3 border-bottom"><strong
+											class="text-muted">Total Price Book</strong><strong
+											th:text="${total} + ' $'"></strong></li>
+										<li class="d-flex justify-content-between py-3 border-bottom"><strong
+											class="text-muted">Ship Price</strong><strong>Free
+												ship</strong></li>
+										<li class="d-flex justify-content-between py-3 border-bottom"><strong
+											class="text-muted">VAT</strong><strong>10 %</strong></li>
+										<li class="d-flex justify-content-between py-3 border-bottom"><strong
+											class="text-muted">Total</strong>
+											<h5 class="font-weight-bold" th:text="${total_price} + ' $'"></h5>
+										</li>
+									</ul>
+									<input class="btn btn-success rounded-pill py-2 btn-block" type="submit" value="Order"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer class="page-footer text-center font-small mt-4 wow fadeIn"
+		style="background-color: lightslategrey;">
+		<hr class="my-4">
+		<div class="">
+			<a target="_blank"><i class="fab fa-facebook-f mr-3"></i></a> <a
+				target="_blank"><i class="fab fa-google-plus-g mr-3"></i></a> <a
+				target="_blank"><i class="fab fa-github mr-3"></i></a> <a
+				target="_blank"><i class="fab fa-dribbble mr-3"></i></a> <a
+				target="_blank"><i class="fab fa-pinterest mr-3"></i></a> <a
+				target="_blank"><i class="fab fa-codepen mr-3"></i></a>
+		</div>
+		<div class="footer-copyright py-3">
+			© 2022 Design By: <a target="_blank"> Loggit </a>
+		</div>
+	</footer>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/JS/Bookdetailshop.js}" type="text/javascript"></script>
+	<script th:src="@{/JS/jquery-3.3.1.min.js}" type="text/javascript"></script>
+	<script th:src="@{/JS/bootstrap.min.js}" type="text/javascript"></script>
+	<script th:src="@{/JS/owl.carousel.min.js}" type="text/javascript"></script>
+	<script th:src="@{/JS/main.js}" type="text/javascript"></script>
+</body>
+</html>

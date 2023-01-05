@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.container_swap {
+	width: 18%;
+}
+
+.div_left {
+	width: 10px;
+	float: left;
+}
+
+.div_right {
+	width: 70px;
+	float: right;
+}
+
+.coltex1{
+	color: red;
+}
+
+.coltex2{
+	color: #4169E1;
+}

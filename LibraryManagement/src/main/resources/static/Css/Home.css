@@ -1,0 +1,21 @@
+@charset "UTF-8";
+.hhh{
+    text-align: center;
+}
+.buton{
+    width: 300px;
+}
+.err{
+    color: red;
+}
+.container_swap{
+    width: 15%;
+}
+.div_left{
+    width: 10px;
+    float: left;
+}
+.div_right{
+    width: 70px;
+    float: right;
+}
